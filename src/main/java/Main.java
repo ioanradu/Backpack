@@ -41,27 +41,18 @@ public class Main {
         displayToConsole(problem);
 
         // Cazul nesortat
-        /*generatedItems = Util.generateItems(100);
-        problem.setAvailableItems(generatedItems);*/
-
         System.out.println("NOT SORTED");
         problem.setBackpack(new Backpack(12));//RESETAM RUCSACUL
         problem.moveItemsToBackpack();
         displayToConsole(problem);
 
         //Cazul obiecte usoare
-       /* generatedItems = Util.generateItems(100);
-        problem.setAvailableItems(generatedItems);*/
-
         System.out.println("SORTED BY LIGHT OBJECTS");
         problem.setBackpack(new Backpack(12));//RESETAM RUCSACUL
         problem.moveLightItemsToBackpack();
         displayToConsole(problem);
 
         //Cazul obiecte fractionale
-       /* generatedItems = Util.generateItems(100);
-        problem.setAvailableItems(generatedItems);*/
-
         System.out.println("FRACTION OF OBJECTS");
         problem.setBackpack(new Backpack(12));//RESETAM RUCSACUL
         problem.moveFractionOfItemsToBackpack();
@@ -72,9 +63,11 @@ public class Main {
         double totalWeightOfItemsInBackpack;
         double backpackCapacity;
         double totalValue;
+
         totalWeightOfItemsInBackpack = problem.getTotalWeightOfItemsBackpack();
         backpackCapacity = problem.getBackpackCapacity();
         totalValue = problem.getTotalValueOfItemsBackpack();
+
         System.out.println("Capacity: " + backpackCapacity + ", total weight in backpack: "
                 + totalWeightOfItemsInBackpack + ", number of items in backpack: " + problem
                 .getNumberOfItemsInBackpack());

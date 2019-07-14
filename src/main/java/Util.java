@@ -33,10 +33,7 @@ public class Util {
         try (Writer writer = new OutputStreamWriter(
                 new FileOutputStream(PATH_TO_FILE), "UTF-8")) {
             Gson gson = new GsonBuilder().create();
-
             gson.toJson(problem, writer);
-
-
         }
     }
 

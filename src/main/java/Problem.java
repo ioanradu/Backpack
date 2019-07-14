@@ -50,10 +50,22 @@ public class Problem {
                 countEachTypeOfAvailableItems.put(key, value);
             }
         }
+
+        // sau altfel
+
+        /*for (int index = 0; index < availableItems.size(); index++){
+            Item currentItem = availableItems.get(index);
+            String currentItemName = currentItem.getName();
+            Integer beforeItemCount = countEachTypeOfAvailableItems.get(currentItemName);
+            if(beforeItemCount == null){
+                beforeItemCount = 0;
+            }
+            countEachTypeOfAvailableItems.put(currentItemName, beforeItemCount + 1);
+        }*/
     }
 
     public void calculateAndStoreTheSumValueOfEveryAvailableItem() {
-        for (Item item : availableItems) {
+        /*for (Item item : availableItems) {
             String key = item.getName();
             double value = item.getValue();
             double sumOfValues = 0;
@@ -64,6 +76,19 @@ public class Problem {
                 sumOfValues += values + value;
                 sumOfEveryItemValues.put(key, sumOfValues);
             }
+        }*/
+
+        // sau altfel
+        for (Item item : availableItems) {
+            String key = item.getName();
+            double value = item.getValue();
+            double sumOfValues = 0;
+            Double currentItemValue = sumOfEveryItemValues.get(key);
+            if (currentItemValue == null) {
+                currentItemValue = 0d;
+            }
+            sumOfValues += currentItemValue + value;
+            sumOfEveryItemValues.put(key, sumOfValues);
         }
     }
 
@@ -76,6 +101,7 @@ public class Problem {
                 }
             }
         }
+        // se poate face doar o afisare cu Entry fara stocare in HashMap
     }
 
     public List<Item> getAvailableItems() {
@@ -110,9 +136,10 @@ public class Problem {
     public void moveItemsToBackpack() {
         for (int index = 0; index < availableItems.size(); index++) {
             Item currentItem = availableItems.get(index);
-            backpack.add(currentItem);
+            if(backpack.add(currentItem)){
+                availableItems.remove(currentItem);
+            }
         }
-        removeAvailableItemsAfterCopyingToTheItemList();
     }
 
     public void moveProfitableItemsToBackpack() {
@@ -120,12 +147,11 @@ public class Problem {
         // System.out.println(itemSet);
         Iterator<Item> iterator = itemSet.iterator();
         while (iterator.hasNext()) {
-            backpack.add(iterator.next());
+            Item currentItem = iterator.next();
+            if(backpack.add(currentItem)){
+                availableItems.remove(currentItem);
+            }
         }
-        removeAvailableItemsAfterCopyingToTheItemList();
-        /* for(int index = 0; index < itemSet.size(); index++){
-
-        }*/
     }
 
     /* public void showItemListOfBackpack(){
@@ -139,18 +165,22 @@ public class Problem {
         // System.out.println(itemSet);
         Iterator<Item> iterator = itemSet.iterator();
         while (iterator.hasNext()) {
-            backpack.add(iterator.next());
+            Item currentItem = iterator.next();
+            if(backpack.add(currentItem)){
+                availableItems.remove(currentItem);
+            }
         }
-        removeAvailableItemsAfterCopyingToTheItemList();
     }
 
     public void moveFractionOfItemsToBackpack() {
         Set<Item> itemSet = new TreeSet<>(availableItems);
         Iterator<Item> iterator = itemSet.iterator();
         while (iterator.hasNext()) {
-            backpack.addFraction(iterator.next());
+            Item currentItem = iterator.next();
+            if(backpack.addFraction(currentItem)){
+                availableItems.remove(currentItem);
+            }
         }
-        removeAvailableItemsAfterCopyingToTheItemList();
     }
 
     public void setBackpack(Backpack backpack) {
@@ -167,14 +197,6 @@ public class Problem {
 
     public int getAvailableItemsSize() {
         return availableItems.size();
-    }
-
-    public void showItemListOfBackpack() {
-        backpack.showItemList();
-    }
-
-    public void removeAvailableItemsAfterCopyingToTheItemList() {
-        availableItems.removeAll(backpack.getItemList());
     }
 }
 

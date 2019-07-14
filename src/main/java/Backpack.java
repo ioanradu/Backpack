@@ -52,33 +52,27 @@ public class Backpack {
         return itemList.size();
     }
 
-    public void add(Item item) {
+    public boolean add(Item item) {
         if ((remainAvailableCapacity() >= item.getWeight())) {
             itemList.add(item);
-        }/*else {
-            System.out.println("Backpack is full!");
-        }*/
+            return true;
+        }
+        return false;
     }
 
-    public void addFraction(Item item) {
+    public boolean addFraction(Item item) {
         double availableCapacity = remainAvailableCapacity();
         if (availableCapacity == 0) {
-            return;
+            return false;
         }
         if ((remainAvailableCapacity() >= item.getWeight())) {
             itemList.add(item);
+            return true;
         } else {
             Item fractionItem = new Item(item.getName(), availableCapacity, availableCapacity * item.getValue() / item.getWeight());
             itemList.add(fractionItem);
+            return true;
         }
     }
-
-    public void showItemList() {
-        for (Item item : itemList) {
-            System.out.print(item);
-        }
-    }
-
-
 }
 
